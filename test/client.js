@@ -14,8 +14,11 @@ const join = new Join({
     uid:'xx',
     avatar:'xxx',
 });
-for(var i=0;i<10000;i++) {
-    client.doCheck(join, function(err, response) {
-        console.log(err,'result:', response);
-    });
-}
+setTimeout(function(){
+    console.log('begin request');
+    for(var i=0;i<100000;i++) {
+        client.doCheck(join, function(err, response) {
+            console.log(err,'result:', response);
+        });
+    }
+},5000);
