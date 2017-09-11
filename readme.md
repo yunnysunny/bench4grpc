@@ -17,10 +17,16 @@ node-inspector
 node --debug index.js
 ```
 
-4. start client
+4. start jmeter
+
+Since Node.js is not good at long loop run, I create a project use jmeter to do request, which is hosted [jmeter4grpc](https://github.com/yunnysunny/jmeter4grpc).
+
+I have uploaded the jar library created by the jmeter project and a jmeter's project file, which are hosted on [jmeter4grpc-0.0.1.jar](https://silian.whyun.com/download/jmeter4grpc-0.0.1.jar) and [grpc_bench.jmx](https://silian.whyun.com/download/grpc_bench.jmx). 
+
+The default of paramters of host and port in `grpc_bench.jmx` is `127.0.0.1` and `1987`, you can load the jmx file and modify it in jmeter, then resave it. At the end run the command as follows:
 
 ```
-node test/client.js
+jmeter_dir/bin/jmeter -n -t grpc_bench.jmx -l the_result_log -e -o output_dir/
 ```
 
 5. create cpu profile
