@@ -1,7 +1,11 @@
 const path = require('path');
 const grpc = require('grpc');
-const PROTO_PATH = path.resolve(__dirname, './protobuf/auth.proto');
+const protobuf = require('protobufjs');
+const root = new protobuf.Root();
 
-exports.grpcProto = grpc.load(PROTO_PATH,'proto',{}).com.whyun;
+const PROTO_PATH = path.resolve(__dirname, './protobuf/auth.proto');
+const protoRoot = root.loadSync(PROTO_PATH, { keepCase: true, enumsAsStrings:true });
+
+exports.grpcProto = grpc.loadObject(protoRoot,{protobufjsVersion:6}).com.whyun;
 
 exports.port = process.env.BENCH_TEST_PORT || 1987;
